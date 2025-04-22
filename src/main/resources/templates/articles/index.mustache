@@ -3,68 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <title>게시판 목록</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
-    <!-- 헤더 -->
-    <div>
-        <!-- 헤더 내용 -->
-    </div>
+<body class="container mt-5">
+{{>layouts/header}}
+    <h2 class="mb-4">📄 회원 정보</h2>
 
-    <!-- 메시지 출력 -->
-    <div>
-        {{msg}}
-    </div>
-
-    <!-- 게시판 목록 테이블 -->
-    <table class="table">
-        <thead>
+    <!-- 게시글 테이블 -->
+    <table class="table table-bordered">
+        <thead class="table-light">
             <tr>
-                <th scope="col">Id</th>
-                <th scope="col">Title</th>
-                <th scope="col">Content</th>
+                <th>ID</th>
+                <th>제목</th>
+                <th>내용</th>
+                <th>관리</th>
             </tr>
         </thead>
         <tbody>
-            {{#list}}
+            {{#list.content}}
             <tr>
-                <th>{{board_no}}</th>
-                <td><a href="/board/boardOne?id={{board_no}}">{{board_title}}</a></td>
-                <td>{{board_content}}</td>
+                <td>{{id}}</td>
+                <td><a href="/articles/show?id={{id}}">{{title}}</a></td>
+                <td>{{content}}</td>
+                <td>
+                    <a href="/articles/edit?id={{id}}" class="btn btn-sm btn-warning">수정</a>
+                    <a href="/articles/delete?id={{id}}" class="btn btn-sm btn-danger">삭제</a>
+                </td>
             </tr>
-            {{/list}}
+            {{/list.content}}
         </tbody>
     </table>
 
     <!-- 검색 폼 -->
-    <form method="get" action="/board/boardList" class="mb-3">
-        <input type="text" name="word" class="form-control" placeholder="검색어 입력">
+    <form method="get" action="/articles/index" class="mb-4">
+        <input type="text" name="word" value="{{word}}" class="form-control" placeholder="회원 검색">
         <button type="submit" class="btn btn-primary mt-2">검색</button>
     </form>
 
     <!-- 페이지네이션 -->
-    <div>
-        <!-- 첫 페이지가 아닐 때 -->
-        {{^list.isFirst}}
-        <a href="/board/boardList?currentPage={{prePage}}&word={{word}}">이전페이지</a>
-        {{/list.isFirst}}
+    <div class="d-flex gap-3 mb-4">
+        {{^list.first}}
+        <a href="/articles/index?currentPage={{prePage}}&word={{word}}" class="btn btn-outline-secondary">이전</a>
+        {{/list.first}}
 
-        <!-- 현재 페이지 표시 -->
-        {{list.getNumber}}
+        <span class="align-self-center">현재 페이지: {{list.number}}</span>
 
-        <!-- 다음 페이지가 있을 때 -->
         {{#list.hasNext}}
-        <a href="/board/boardList?currentPage={{nextPage}}&word={{word}}">다음페이지</a>
+        <a href="/articles/index?currentPage={{nextPage}}&word={{word}}" class="btn btn-outline-secondary">다음</a>
         {{/list.hasNext}}
     </div>
 
-    <!-- 새 게시글 작성 링크 -->
-    <a href="/board/addBoard">새 게시글 작성</a>
-
-    <!-- 푸터 -->
+    <!-- 새 글 작성 -->
     <div>
-        <!-- 푸터 내용 -->
+        <a href="/articles/new" class="btn btn-success">📝 새 게시글 작성</a>
     </div>
+{{>layouts/footer}}
 </body>
 </html>

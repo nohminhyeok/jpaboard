@@ -29,7 +29,7 @@ public class BoardController {
     }
 
     // ✅ 루트 URL 접속 시 게시판 목록으로 리다이렉트
-    @GetMapping("/")
+    @GetMapping("/board")
     public String rootRedirect() {
         return "redirect:/board/boardList";
     }
@@ -52,7 +52,7 @@ public class BoardController {
                             @RequestParam(value = "rowPerPage", defaultValue = "10") int rowPerPage,
                             @RequestParam(value = "word", defaultValue = "") String word) {
 
-        Sort sort = Sort.by("boardTitle").ascending();
+        Sort sort = Sort.by("boardNo").ascending();
         PageRequest pageable = PageRequest.of(currentPage, rowPerPage, sort);
 
         Page<Board> list = boardRepository.findByBoardTitleContaining(word, pageable);
@@ -98,10 +98,10 @@ public class BoardController {
     @GetMapping("/board/deleteConfirm")
     public String deleteConfirm(@RequestParam int boardNo, Model model) {
         model.addAttribute("boardNo", boardNo);
-        return "board/deleteConfirm"; // Mustache 또는 HTML 템플릿
+        return "board/deleteConfirm";
     }
     
-    @PostMapping("/board/deleteBoard") // ✅ POST 요청 처리 가능
+    @PostMapping("/board/deleteBoard")
     public String deleteBoard1(@RequestParam int boardNo, RedirectAttributes rda) {
         Board board = boardRepository.findById(boardNo).orElse(null);
 

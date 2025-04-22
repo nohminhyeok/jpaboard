@@ -9,7 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Controller
 public class HomeController {
-	@GetMapping("/Home")
+	@GetMapping("/home")
 	public String home() {
 		// model.addAttribute("loginName", "구디");
 		// System.out.println(model.getAttribute("loginName"));

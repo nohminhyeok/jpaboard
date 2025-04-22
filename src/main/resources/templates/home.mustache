@@ -2,27 +2,38 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <title>메인 메뉴</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f2f4f6;
+    }
+    .menu-container {
+      max-width: 400px;
+      margin: 100px auto;
+    }
+    .menu-button {
+      margin-bottom: 15px;
+    }
+  </style>
 </head>
 <body>
-	<!-- header.mustache include -->
-	{{>layouts/header}}
-	
-	<div>
-		<a href="/articles/index">Article 리스트</a>
-	</div>
+  <!-- header.mustache include -->
+  {{>layouts/header}}
 
-	<div>
-		<a href="/board/boardList">Board 리스트</a>
-	</div>
+  <div class="container menu-container">
+    <div class="card shadow p-4 text-center">
+      <h3 class="mb-4">📚 메뉴 선택</h3>
 
-	<div>
-		<a href="/member/joinMember">회원가입</a>
-	</div>
-	
-	<!-- footer.mustache include -->
-	{{>layouts/footer}}
+      <div class="d-grid gap-3">
+        <a href="/articles/index" class="btn btn-outline-primary menu-button">회원정보</a>
+        <a href="/board/boardList" class="btn btn-outline-success menu-button">게시판</a>
+        <a href="/member/memberList" class="btn btn-outline-dark menu-button">회원목록</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- footer.mustache include -->
+  {{>layouts/footer}}
 </body>
 </html>

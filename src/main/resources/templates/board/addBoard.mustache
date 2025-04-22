@@ -2,22 +2,43 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+  <title>새 게시글 작성</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f2f4f6;
+    }
+    .post-container {
+      max-width: 600px;
+      margin: 80px auto;
+    }
+  </style>
 </head>
 <body>
-	<h1>새 게시글 작성</h1>
-	<form action="/board/addBoard" method="post">
-		<table border="1">
-			<tr>
-				<th>boardTitle</th>
-				<td><input type="text" name="boardTitle"></td>
-			</tr>
-			<tr>
-				<th>boardContent</th>
-				<td><input type="text" name="boardContent"></td>
-			</tr>
-		</table>
-	<button type="submit">작성하기</button>
-	</form>
+{{>layouts/header}}
+  <div class="container post-container">
+    <div class="card shadow p-4">
+      <h3 class="text-center mb-4">📝 새 게시글 작성</h3>
+
+      <form action="/board/addBoard" method="post">
+        <div class="mb-3">
+          <label for="boardTitle" class="form-label">제목</label>
+          <input type="text" class="form-control" id="boardTitle" name="boardTitle" required>
+        </div>
+
+        <div class="mb-4">
+          <label for="boardContent" class="form-label">내용</label>
+          <textarea class="form-control" id="boardContent" name="boardContent" rows="6" required></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100">작성하기</button>
+      </form>
+
+      <div class="text-center mt-3">
+        <a href="/board/boardList" class="text-muted">← 게시판 목록으로</a>
+      </div>
+    </div>
+  </div>
+{{>layouts/footer}}
 </body>
 </html>

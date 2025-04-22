@@ -57,9 +57,7 @@ public class ArticleController {
 							, @RequestParam (value = "currentPage", defaultValue = "0") int currentPage
 							, @RequestParam (value = "rowPerPage", defaultValue = "10") int rowPerPage
 							, @RequestParam (value = "word", defaultValue="") String word) {
-		Sort s1 = Sort.by("title").ascending();
-		Sort s2 = Sort.by("content").descending();
-		Sort sort = s1.and(s2);
+		Sort sort = Sort.by("id").ascending();
 		
 		PageRequest pageable = PageRequest.of(currentPage, rowPerPage, sort);
 		Page<Article> list = articleRepository.findByTitleContaining(word, pageable);

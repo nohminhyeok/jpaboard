@@ -2,22 +2,49 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+ <title>회원가입</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f2f4f6;
+    }
+    .join-container {
+      max-width: 400px;
+      margin: 100px auto;
+    }
+    .card-min-height {
+      min-height: 390px; /* 로그인 카드와 동일한 높이로 맞춤 */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+  </style>
 </head>
 <body>
-	<h1>회원가입</h1>
-	{{#msg}}
-		<div>{{msg}}</div>
-	{{/msg}}
-	
-	<form method="post" action="/member/joinMember">
-		<div>
-			memberId : <input type="text" name="memberId">
-		</div>
-		<div>
-			memberPw : <input type="password" name="memberPw">
-		</div>
-		<button type="submit">회원가입</button>
-	</form>
+  <div class="container join-container">
+    <div class="card shadow p-4 card-min-height">
+      <h3 class="text-center mb-4">📝 회원가입</h3>
+
+      {{#msg}}
+      <div class="alert alert-warning text-center py-2">{{msg}}</div>
+      {{/msg}}
+
+      <form method="post" action="/member/joinMember">
+        <div class="mb-3">
+          <label for="memberId" class="form-label">아이디</label>
+          <input type="text" class="form-control" name="memberId" id="memberId" required>
+        </div>
+        <div class="mb-4">
+          <label for="memberPw" class="form-label">비밀번호</label>
+          <input type="password" class="form-control" name="memberPw" id="memberPw" required>
+        </div>
+        <button type="submit" class="btn btn-primary w-100">가입하기</button>
+      </form>
+
+      <div class="text-center mt-3">
+        <a href="/member/login" class="text-muted text-decoration-none">이미 계정이 있으신가요? 로그인</a>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
