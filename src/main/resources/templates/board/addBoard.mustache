@@ -5,6 +5,19 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+	<h1>새 게시글 작성</h1>
+	<form action="/board/addBoard" method="post">
+		<table border="1">
+			<tr>
+				<th>boardTitle</th>
+				<td><input type="text" name="boardTitle"></td>
+			</tr>
+			<tr>
+				<th>boardContent</th>
+				<td><input type="text" name="boardContent"></td>
+			</tr>
+		</table>
+	<button type="submit">작성하기</button>
+	</form>
 </body>
 </html>

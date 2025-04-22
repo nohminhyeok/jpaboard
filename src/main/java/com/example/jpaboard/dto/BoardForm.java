@@ -10,15 +10,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class BoardForm {
-	private int board_no;
-	private String board_title;
-	private String board_content;
+	private int boardNo;
+	private String boardTitle;
+	private String boardContent;
 	
 	public Board toEntity() {
 		Board entity = new Board();
-		entity.setBoardNo(this.board_no);
-		entity.setBoardTitle(this.board_title);
-		entity.setBoardContent(this.board_title);
+		entity.setBoardNo(this.boardNo);
+		entity.setBoardTitle(this.boardTitle);
+		entity.setBoardContent(this.boardContent);
 		return entity;
 	}
 

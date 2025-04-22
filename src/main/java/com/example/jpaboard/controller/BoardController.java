@@ -1,7 +1,5 @@
 package com.example.jpaboard.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -75,15 +73,15 @@ public class BoardController {
     }
 
     @GetMapping("/board/boardOne")
-    public String boardOne(Model model, @RequestParam int id) {
-        Board board = boardRepository.findById(id).orElse(null);
+    public String boardOne(Model model, @RequestParam int boardNo) {
+        Board board = boardRepository.findById(boardNo).orElse(null);
         model.addAttribute("board", board);
         return "board/boardOne";
     }
 
     @GetMapping("/board/modifyBoard")
-    public String modifyBoard(Model model, @RequestParam int id) {
-        Board board = boardRepository.findById(id).orElse(null);
+    public String modifyBoard(Model model, @RequestParam int boardNo) {
+        Board board = boardRepository.findById(boardNo).orElse(null);
         model.addAttribute("board", board);
         return "board/modifyBoard";
     }
@@ -93,20 +91,28 @@ public class BoardController {
         Board board = form.toEntity();
         boardRepository.save(board);
         rda.addFlashAttribute("msg", "게시판이 성공적으로 수정되었습니다.");
-        return "redirect:/board/boardOne?id=" + form.getId();
+        return "redirect:/board/boardList"; // ✅ boardList로 이동
     }
+    
 
-    @GetMapping("/board/deleteBoard")
-    public String deleteBoard(@RequestParam int id, RedirectAttributes rda) {
-        Board board = boardRepository.findById(id).orElse(null);
+    @GetMapping("/board/deleteConfirm")
+    public String deleteConfirm(@RequestParam int boardNo, Model model) {
+        model.addAttribute("boardNo", boardNo);
+        return "board/deleteConfirm"; // Mustache 또는 HTML 템플릿
+    }
+    
+    @PostMapping("/board/deleteBoard") // ✅ POST 요청 처리 가능
+    public String deleteBoard1(@RequestParam int boardNo, RedirectAttributes rda) {
+        Board board = boardRepository.findById(boardNo).orElse(null);
 
         if (board == null) {
-            rda.addFlashAttribute("msg", "게시판 삭제에 실패했습니다.");
+            rda.addFlashAttribute("msg", "삭제 실패");
             return "redirect:/board/boardList";
         }
 
         boardRepository.delete(board);
-        rda.addFlashAttribute("msg", "게시판이 성공적으로 삭제되었습니다.");
+        rda.addFlashAttribute("msg", "삭제 성공");
         return "redirect:/board/boardList";
     }
+    
 }

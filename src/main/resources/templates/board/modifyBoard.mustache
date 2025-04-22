@@ -1,10 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+  <meta charset="UTF-8">
+  <title>게시판 수정</title>
 </head>
 <body>
-
+	<form action="/board/modifyBoard" method="post">
+		<input type="hidden" name="boardNo" value="{{board.boardNo}}">
+		
+			<table border="1">
+				<tr>
+					<th>제목</th>
+					<td><input type="text" name="boardTitle" value="{{board.boardTitle}}"></td>
+				</tr>
+				<tr>
+					<th>내용</th>
+					<td><textarea name="boardContent">{{board.boardContent}}</textarea></td>
+				</tr>
+			</table>
+		<br>
+		<button type="submit">수정 완료</button>
+	</form>
 </body>
 </html>
