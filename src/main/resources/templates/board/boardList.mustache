@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>게시판 목록</title>
+</head>
+<body>
+	<table border="1">
+		<tr>
+			<th>board_id</th>
+			<th>board_title</th>
+			<th>board_content</th>
+		</tr>
+		{{#boardList}}
+		<tr>
+			<td>{{boardNo}}</td>
+			<td><a href="/board/boardOne">{{boardTitle}}</a></td>
+			<td>{{boardContent}}</td>
+		</tr>
+		{{/boardList}}
+	</table>
+	<form action="/board/modifyBoard">
+		<button>수정</button>
+	</form>
+	<form action="/board/addBoard">
+		<button>새 게시글 작성</button>
+	</form>
+	    <div>
+        <!-- 첫 페이지가 아닐 때 -->
+        {{^boardList.isFirst}}
+        <a href="/board/boardList?currentPage={{prePage}}&word={{word}}">이전페이지</a>
+        {{/boardList.isFirst}}
+
+        <!-- 현재 페이지 표시 -->
+        {{boardList.getNumber}}
+
+        <!-- 다음 페이지가 있을 때 -->
+        {{#boardList.hasNext}}
+        <a href="/board/boardList?currentPage={{nextPage}}&word={{word}}">다음페이지</a>
+        {{/boardList.hasNext}}
+    </div>
+</body>
+</html>
