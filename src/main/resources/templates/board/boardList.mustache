@@ -31,9 +31,13 @@
 		</tr>
 			{{/boardList}}
 	</table>
-<form action="/board/addBoard">
-	<button>새 게시글 작성</button>
-</form>
+    <form method="get" action="/board/boardList" class="mb-3">
+       	<input type="text" name="word" class="form-control" placeholder="검색어 입력">
+       	<button type="submit" class="btn btn-primary mt-2">검색</button>
+	</form>
+	<form action="/board/addBoard">
+		<button>새 게시글 작성</button>
+	</form>
     <div>
        <!-- 첫 페이지가 아닐 때 -->
 		{{^boardList.isFirst}}
